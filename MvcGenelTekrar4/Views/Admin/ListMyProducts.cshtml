@@ -1,0 +1,40 @@
+﻿@model MvcGenelTekrar4.Models.ViewModels.ListProductsViewModel
+
+@{
+    ViewBag.Title = "ListMyProducts";
+
+}
+
+<h2>ListMyProducts</h2>
+@Html.ActionLink("Logout","Logout", "Account", null, new { @class = "btn btn-default" })
+
+<hr />
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category Name</th>
+            <th>Supplier Company Name</th>
+            <th>Unit Price</th>
+            <th>Units In Stock</th>
+            <th colspan="2">@Html.ActionLink("Add Product", "AddMyProduct", null, new { @class = "btn btn-default" })</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@(product.CategoryId == null ? "No Category" : product.Category.CategoryName)</td>
+                <td>@(product.SupplierId == null ? "No Supplier" : product.Supplier.CompanyName)</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.UnitsInStock</td>
+                <td>@Html.ActionLink("Update", "UpdateMyProduct", new { id = product.ProductID }, new { @class = "btn btn-xs btn-primary" })</td>
+                <td>@Html.ActionLink("Delete", "DeleteMyProduct", new { id = product.ProductID }, new { @class = "btn btn-xs btn-danger" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

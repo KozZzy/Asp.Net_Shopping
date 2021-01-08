@@ -1,0 +1,45 @@
+﻿
+@model MvcGenelTekrar4.Models.ViewModels.ListCartsViewModel
+
+@{
+    ViewBag.Title = "ListMyCarts";
+}
+
+<h2>ListMyCarts</h2>
+<hr />
+
+@using (Html.BeginForm("UpdateMyCarts", "Home", FormMethod.Post))
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Price</th>
+                <th>Sub Price</th>
+                <th><button type="submit">Update</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Model.Carts)
+            {
+                <tr>
+                    <td>@cart.Name</td>
+                    <td>@Html.TextBox("amounts", cart.Amount)</td>
+                    <td>@cart.Price</td>
+                    <td>@cart.SubPrice</td>
+                    <td>@Html.ActionLink("Delete", "DeleteMyCart", new { id = cart.ID }, new { @class = "btn btn-xs btn-danger" })</td>
+                </tr>
+            }
+            <tr>
+                <td><h2>Total Price</h2></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h2>@Model.TotalPrice</h2></td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+
